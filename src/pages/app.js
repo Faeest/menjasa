@@ -7,18 +7,15 @@ import { Container, Box, ChakraProvider } from "@chakra-ui/react";
 const Home = () => {
     const session = useSession();
     const supabase = useSupabaseClient();
-    if (session) {
-        return window.location.replace("/app");
-    }
     return (
         <ChakraProvider>
             <Container centerContent p={3}>
                 <Box padding="4" color="black" w={"lg"}>
-                    <p>hello world, this is menjasa</p>
+                    <Account session={session} />
                 </Box>
             </Container>
         </ChakraProvider>
-    );
+    ); 
 };
 
 export default Home;
