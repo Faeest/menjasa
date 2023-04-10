@@ -73,7 +73,7 @@ a {
     display: none;
 }
 
-.supabase-auth-ui_ui-container[gap="small"]:first-child,
+.supabase-auth-ui_ui-container[gap="small"],
 .supabase-auth-ui_ui-divider {
     display: none !important;
 }
@@ -86,7 +86,7 @@ a {
     background-color: #dee2e6 !important;
 }
 .supabase-auth-ui_ui-button {
-    box-shadow: 0.4rem 0.4rem 0rem rgba(33, 37, 41,.5) !important;
+    box-shadow: 0.4rem 0.4rem 0rem #212529 !important;
 }
 .supabase-auth-ui_ui-button:focus {
     box-shadow: 0 0 0 0 #212529 !important;
