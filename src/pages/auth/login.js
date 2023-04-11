@@ -2,7 +2,7 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Container, ChakraProvider, Box } from "@chakra-ui/react";
-import RedirectHelper from "../helpers/redirect.js";
+import RedirectHelper from "@/helpers/redirect.js";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { css, jsx } from "@emotion/react";
 export default function Login() {

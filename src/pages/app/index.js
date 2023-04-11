@@ -1,7 +1,7 @@
 import { useSession } from "@supabase/auth-helpers-react";
-import Account from "../components/Account";
+import Account from "@/components/Account";
 import { Container, Box } from "@chakra-ui/react";
-import RedirectHelper from "../helpers/redirect.js";
+import RedirectHelper from "@/helpers/redirect.js";
 export default function PageApp() {
     RedirectHelper()
     const session = useSession();

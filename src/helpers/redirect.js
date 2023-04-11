@@ -5,13 +5,13 @@ import { useSession } from "@supabase/auth-helpers-react";
 export default function RedirectHelper() {
     const session = useSession();
     const list = {
-        "/login": {
+        "/auth/login": {
             session: false,
             from: ["/app"],
         },
         "/app": {
             session: true,
-            from: ["/login"],
+            from: ["/auth/login"],
         },
     };
     useEffect(() => {
@@ -26,4 +26,7 @@ export default function RedirectHelper() {
             });
         });
     });
+}
+export async function redir(url="/") {
+    return await Router.push(url)
 }

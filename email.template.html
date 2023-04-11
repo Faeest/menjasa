@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Confirm Your Signup</title>
+    </head>
+    <body style="color: #1f2d3d; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fff">
+        <div style="width: 90%; max-width: 600px; margin: auto; height: 100vh">
+            <h1 style="margin: auto; text-align: center; padding-top: 2rem;color: #1f2d3d;">Hey, <span style="text-decoration: none; font-weight: 900; color: #1abc9b;">{{ .Email }}</span> !</h1>
+            <div style="margin: auto; max-width: 400px; width: 100%; padding-top: 2rem">
+                <img style="margin: auto; width: 100%;" src="https://phbhboofyzrbsrgdhszf.supabase.co/storage/v1/object/public/assets/email.jpg" alt="">
+            </div>
+            <p style="color: #1f2d3d; font-size: 1.2rem;">Welcome to Menjasa, Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus doloremque nam sint ratione error, alias dicta facere cumque nihil magnam!</p>
+            <div style="margin: 2rem auto; width: fit-content">
+                <a href="{{ .ConfirmationURL }}" style="text-decoration: none; filter: drop-shadow(0.4rem 0.4rem 0rem rgba(33, 37, 41, 0.5)); color: #f8f9fa; font-weight: 600; font-size: 1.5rem; border-radius: 0.5rem; background-color: #1abc9b; padding: 1rem 2rem 1rem 2rem"> Verify </a>
+            </div>
+            <p style="text-align: center; padding-top: 3rem;color: #1f2d3d; font-size: 1.2rem;">Cheers :) <a style="text-decoration: none; color: #1abc9b; font-weight: 600;" href="{{ .SiteURL }}">Menjasa</a></p>
+        </div>
+    </body>
+</html>
