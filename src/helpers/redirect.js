@@ -3,7 +3,7 @@ import Router from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
 
 export default function RedirectHelper() {
-    return
+    return;
     const session = useSession();
     const list = {
         "/auth/login": {
@@ -28,6 +28,11 @@ export default function RedirectHelper() {
         });
     });
 }
-export async function redir(url="/") {
-    return await Router.push(url)
+export async function redir(url = "/") {
+    return await Router.push(url);
+}
+export async function listenAuth(supabase) {
+    return supabase.auth.onAuthStateChange((event, session) => {
+        if(event == "SIGNED_IN" || event == "SIGNED_OUT") Router.reload();
+    });
 }

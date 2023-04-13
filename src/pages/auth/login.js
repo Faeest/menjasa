@@ -1,22 +1,21 @@
-import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement } from "@chakra-ui/react";
-import RedirectHelper from "@/helpers/redirect.js";
+import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement, useColorMode, IconButton, ButtonGroup, Heading, Tooltip } from "@chakra-ui/react";
+import RedirectHelper, { listenAuth } from "@/helpers/redirect.js";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { css, jsx } from "@emotion/react";
 import { Field, Form, Formik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import ModeToggler from "@/components/ModeToggler";
 
-function validateData(value) {
-    let error;
-    if (!value) {
-        error = "This field is required";
-    }
-    return error;
-}
 export default function Login() {
-    RedirectHelper();
-    const supabase = useSupabaseClient(),
+    const validateEmail = (value) => {
+            let error = !value ? "This field is required" : undefined;
+            return error;
+        },
+        validatePass = (value) => {
+            return !value ? "This field is required" : undefined;
+        },
+        supabase = useSupabaseClient(),
         signInWithEmail = async (email, pass) => {
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: email,
@@ -24,12 +23,14 @@ export default function Login() {
             });
         },
         [show, setShow] = useState(false),
+        { colorMode, toggleColorMode } = useColorMode(),
         handleClick = () => setShow(!show);
     return (
-        <Container maxW={"container.md"} mt={"14"}>
+        <Container maxW={"md"} mt={"14"}>
             <Formik
                 initialValues={{ email: "", password: "" }}
                 onSubmit={async (values, actions) => {
+                    listenAuth(supabase);
                     await signInWithEmail(values.email, values.password);
                     await new Promise((r) => setTimeout(r, 1000));
                     actions.setSubmitting(false);
@@ -37,35 +38,45 @@ export default function Login() {
             >
                 {(props) => (
                     <Form>
-                        <Field name="email" validate={validateData}>
+                        <Heading fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
+                            Login
+                        </Heading>
+                        <Field name="email" validate={validateEmail}>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
-                                    <FormLabel>First email</FormLabel>
-                                    <Input type="email" {...field} placeholder="email" />
-                                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                                    <FormLabel>Email</FormLabel>
+                                    <Input focusBorderColor="palette.lime" type="email" {...field} placeholder="email" />
+                                    <FormErrorMessage justifyContent={"end"}>{form.errors.email}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
-                        <Field name="password" validate={validateData}>
+                        <Field name="password" validate={validatePass}>
                             {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.password && form.touched.password}>
+                                <FormControl mt={"1.5rem"} isInvalid={form.errors.password && form.touched.password}>
                                     <FormLabel>password</FormLabel>
                                     <InputGroup>
-                                        <Input type={show ? "text" : "password"} {...field} placeholder="password" />
+                                        <Input focusBorderColor="palette.lime" type={show ? "text" : "password"} {...field} placeholder="password" />
 
                                         <InputRightElement width="4.5rem">
                                             <Button h="1.75rem" size="sm" onClick={handleClick}>
-                                                <FontAwesomeIcon icon={solid.faEye} />
+                                                {!show ? <FontAwesomeIcon icon={solid.faEye} /> : <FontAwesomeIcon icon={solid.faEyeSlash} />}
                                             </Button>
                                         </InputRightElement>
                                     </InputGroup>
-                                    <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                                    <FormErrorMessage justifyContent={"end"}>{form.errors.password}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
-                        <Button mt={4} colorScheme="teal" isLoading={props.isSubmitting} type="submit">
-                            Login
-                        </Button>
+                        <ButtonGroup mt={"1.5rem"} justifyContent={"space-between"} w={"full"}>
+                            <Button colorScheme="teal" isLoading={props.isSubmitting} type="submit">
+                                Login
+                            </Button>
+                            <Tooltip placement="top" label="Theme" bg="palette.dark" color="palette.light">
+                                <Box overflow={"hidden"}>
+                                    <ModeToggler />
+                                </Box>
+                            </Tooltip>
+                        </ButtonGroup>
                     </Form>
                 )}
             </Formik>
