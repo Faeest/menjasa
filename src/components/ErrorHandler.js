@@ -45,7 +45,7 @@ export default function ErrorHandler({ type }) {
                     <Text fontSize={{ base: "lg", sm: "xl" }} w={"full"} color={"palette.dark"} css={css(`margin-left:0px !important;margin-top:1rem !important;`)} fontWeight={"semibold"}>
                         {datas[type]?.desc ? datas[type]?.desc : "Reach the developer for further information / report."}
                     </Text>
-                    <Button onClick={() => Router.push("/")} css={css(`margin-left:0px !important;margin-top:1rem !important;`)} variant="outline" fontWeight={700} color={"palette.lime"} border={"2px"} borderColor={"palette.lime"} size="lg" _hover={{ bg: "palette.lime", color: "palette.white" }} _active={{ bg: "palette.black", borderColor: "palette.black" }}>
+                    <Button onClick={() => Router.back()} css={css(`margin-left:0px !important;margin-top:1rem !important;`)} variant="outline" fontWeight={700} color={"palette.lime"} border={"2px"} borderColor={"palette.lime"} size="lg" _hover={{ bg: "palette.lime", color: "palette.white" }} _active={{ bg: "palette.black", borderColor: "palette.black" }}>
                         Go Back
                     </Button>
                 </HStack>

@@ -1,5 +1,5 @@
 import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement, useColorMode, IconButton, ButtonGroup, Heading, Tooltip } from "@chakra-ui/react";
-import { listenAuth,redir } from "@/helpers/redirect.js";
+import { listenAuth, redir } from "@/helpers/redirect.js";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Field, Form, Formik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +7,7 @@ import * as solid from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import ModeToggler from "@/components/ModeToggler";
 
-export default function Login() {
+export default function Register() {
     const validateEmail = (value) => {
             let error = !value
                 ? "This field is required"
@@ -44,8 +44,8 @@ export default function Login() {
             >
                 {(props) => (
                     <Form>
-                        <Heading fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
-                            Login
+                        <Heading fontWeight={"bold"} bgGradient="linear(to-r,palette.black 51%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 51%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
+                            Register
                         </Heading>
                         <Field name="email" validate={validateEmail}>
                             {({ field, form }) => (
@@ -75,11 +75,11 @@ export default function Login() {
                         </Field>
                         <ButtonGroup mt={"1.5rem"} justifyContent={"space-between"} w={"full"}>
                             <Button colorScheme="teal" isLoading={props.isSubmitting} type="submit">
-                                Login
+                                Register
                             </Button>
                             <ButtonGroup>
                                 <Tooltip hasArrow placement="top" label="Sign Up" bg="palette.dark" color="palette.light">
-                                <IconButton onClick={() => redir("/auth/register")} variant="outline" colorScheme="white" icon={<FontAwesomeIcon icon={solid.faPen} />} />
+                                    <IconButton onClick={() => redir("/auth/login")} variant="outline" colorScheme="white" icon={<FontAwesomeIcon icon={solid.faRightToBracket} />} />
                                 </Tooltip>
                                 <Tooltip hasArrow placement="top" label="Theme" bg="palette.dark" color="palette.light">
                                     <Box overflow={"hidden"}>

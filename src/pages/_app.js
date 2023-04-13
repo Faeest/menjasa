@@ -11,15 +11,15 @@ function App({ Component, pageProps }) {
     const theme = extendTheme({
         colors: {
             teal: {
-                100 : "#99e2b4",
-                200 : "#88d4ab",
-                300 : "#78c6a3",
-                400 : "#67b99a",
-                500 : "#1abc9c", //
-                600 : "#358f80",
-                700 : "#248277",
-                800 : "#14746f",
-                900 : "#036666",
+                100: "#99e2b4",
+                200: "#88d4ab",
+                300: "#78c6a3",
+                400: "#67b99a",
+                500: "#1abc9c", //
+                600: "#358f80",
+                700: "#248277",
+                800: "#14746f",
+                900: "#036666",
             },
             palette: {
                 lime: "#1abc9c",
@@ -36,6 +36,11 @@ function App({ Component, pageProps }) {
             <ChakraProvider theme={theme}>
                 <ErrorBoundary>
                     <Component {...pageProps} />
+                    <style jsx global>{`
+                        body {
+                            min-height:100vh;
+                        }
+                    `}</style>
                 </ErrorBoundary>
             </ChakraProvider>
         </SessionContextProvider>
