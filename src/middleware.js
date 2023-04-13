@@ -1,8 +1,32 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request = new NextResponse()) {
+export function middleware(request = new NextRequest()) {
+    let session = request.cookies.get("supabase-auth-token") ? true : false;
+    const list = {
+        "/auth/login": {
+            session: false,
+            from: ["/app"],
+        },
+        "/app": {
+            session: true,
+            from: ["/auth/login"],
+        },
+    };
+    const pathname = new URL(request.url).pathname;
+    let listKeys = Object.keys(list);
+    let newurl = "";
+    listKeys.forEach((e) => {
+        let ss = list[e].session ? session : list[e].session == null ? true : !session;
+        list[e].from.forEach((w) => {
+            if (ss && pathname == w) {
+                let { origin } = request.nextUrl;
+                return (newurl = origin + e)
+            }
+        });
+    });
+    if(newurl != "") {
+        return NextResponse.redirect(newurl);
+    }
     return NextResponse.next();
-    // return NextResponse.redirect(new URL("/about-2", request.url));
 }

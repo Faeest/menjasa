@@ -1,11 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage } from "@chakra-ui/react";
+import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement } from "@chakra-ui/react";
 import RedirectHelper from "@/helpers/redirect.js";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { css, jsx } from "@emotion/react";
 import { Field, Form, Formik } from "formik";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as solid from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 function validateData(value) {
     let error;
@@ -16,14 +16,22 @@ function validateData(value) {
 }
 export default function Login() {
     RedirectHelper();
-    const supabase = useSupabaseClient();
+    const supabase = useSupabaseClient(),
+        signInWithEmail = async (email, pass) => {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: pass,
+            });
+        },
+        [show, setShow] = useState(false),
+        handleClick = () => setShow(!show);
     return (
         <Container maxW={"container.md"} mt={"14"}>
             <Formik
-                initialValues={{ email: "",password: "" }}
+                initialValues={{ email: "", password: "" }}
                 onSubmit={async (values, actions) => {
-                    await new Promise(r => setTimeout(r, 1000));
-                    alert(JSON.stringify(values, null, 2));
+                    await signInWithEmail(values.email, values.password);
+                    await new Promise((r) => setTimeout(r, 1000));
                     actions.setSubmitting(false);
                 }}
             >
@@ -33,7 +41,7 @@ export default function Login() {
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
                                     <FormLabel>First email</FormLabel>
-                                    <Input {...field} placeholder="email" />
+                                    <Input type="email" {...field} placeholder="email" />
                                     <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                                 </FormControl>
                             )}
@@ -42,7 +50,15 @@ export default function Login() {
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.password && form.touched.password}>
                                     <FormLabel>password</FormLabel>
-                                    <Input {...field} placeholder="password" />
+                                    <InputGroup>
+                                        <Input type={show ? "text" : "password"} {...field} placeholder="password" />
+
+                                        <InputRightElement width="4.5rem">
+                                            <Button h="1.75rem" size="sm" onClick={handleClick}>
+                                                <FontAwesomeIcon icon={solid.faEye} />
+                                            </Button>
+                                        </InputRightElement>
+                                    </InputGroup>
                                     <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                                 </FormControl>
                             )}

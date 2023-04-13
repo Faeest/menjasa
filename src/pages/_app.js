@@ -8,9 +8,19 @@ import { extendTheme } from "@chakra-ui/react";
 
 function App({ Component, pageProps }) {
     const [supabase] = useState(() => createBrowserSupabaseClient());
-
     const theme = extendTheme({
         colors: {
+            teal: {
+                100 : "#99e2b4",
+                200 : "#88d4ab",
+                300 : "#78c6a3",
+                400 : "#67b99a",
+                500 : "#1abc9c", //
+                600 : "#358f80",
+                700 : "#248277",
+                800 : "#14746f",
+                900 : "#036666",
+            },
             palette: {
                 lime: "#1abc9c",
                 blue: "#7fd8cc",

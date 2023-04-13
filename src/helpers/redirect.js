@@ -3,6 +3,7 @@ import Router from "next/router";
 import { useSession } from "@supabase/auth-helpers-react";
 
 export default function RedirectHelper() {
+    return
     const session = useSession();
     const list = {
         "/auth/login": {
