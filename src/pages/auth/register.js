@@ -1,4 +1,4 @@
-import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement, useColorMode, IconButton, ButtonGroup, Heading, Tooltip, Select } from "@chakra-ui/react";
+import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement, ButtonGroup, Heading, Tooltip, Select, useToast, IconButton } from "@chakra-ui/react";
 import { listenAuth, redir } from "@/helpers/redirect.js";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Field, Form, Formik } from "formik";
@@ -11,7 +11,7 @@ import { css } from "@emotion/react";
 export default function Register() {
     const validateEmail = (value) => {
             let error = !value
-                ? "This field is required"
+                ? "Email field is required"
                 : !String(value)
                       .toLowerCase()
                       .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
@@ -19,27 +19,92 @@ export default function Register() {
                 : undefined;
             return error;
         },
+        validateUsername = (value) => {
+            if (value != username) {
+                setUsername(value);
+                setValidated(false);
+            }
+            let error = !value
+                ? "Username field is required"
+                : !String(value)
+                      .toLowerCase()
+                      .match(/^[a-zA-Z0-9]+$/)
+                ? "Your username Isn't valid"
+                : value.length < 5? "Not long enough!" : undefined;
+            return error;
+        },
+        validateUsername2 = async () => {
+            if (validateUsername(username) != undefined)
+                return toast({
+                    position: "top",
+                    title: "Warning",
+                    description: validateUsername(username),
+                    status: "warning",
+                    duration: 1500,
+                    isClosable: true,
+                });
+            let res = !(await supabase.from("profiles").select("username").eq("username", username)).data[0];
+            if (!res) {
+                toast({
+                    position: "top",
+                    title: "Unlucky!",
+                    description: "Your username is used by other!",
+                    status: "warning",
+                    duration: 1500,
+                    isClosable: true,
+                });
+            }
+            setValidated(res);
+        },
         validatePass = (value) => {
-            return !value ? "This field is required" : undefined;
+            return !value ? "Pass field is required" : undefined;
         },
         supabase = useSupabaseClient(),
-        signInWithEmail = async (email, pass) => {
-            const { data, error } = await supabase.auth.signInWithPassword({
+        signUp = async (email, pass, role, username) => {
+            return await supabase.auth.signUp({
                 email: email,
                 password: pass,
+                options: {
+                    data: {
+                        role: role,
+                        username: username,
+                    },
+                    emailRedirectTo: "/app",
+                },
             });
         },
         [show, setShow] = useState(false),
-        { colorMode, toggleColorMode } = useColorMode(),
+        [username, setUsername] = useState(""),
+        [validated, setValidated] = useState(false),
+        toast = useToast(),
         handleClick = () => setShow(!show);
     return (
         <Container maxW={"md"} mt={"14"} h={"full"}>
             <Formik
-                initialValues={{ email: "", password: "" }}
+                initialValues={{ email: "", password: "", username: "" }}
                 onSubmit={async (values, actions) => {
+                    if (!validated)
+                        return toast({
+                            position: "top",
+                            title: "Error!",
+                            description: "Validate you username first!",
+                            status: "error",
+                            duration: 1500,
+                            isClosable: true,
+                        });
                     listenAuth(supabase);
-                    await signInWithEmail(values.email, values.password);
-                    await new Promise((r) => setTimeout(r, 1000));
+                    let { error, data } = await signUp(values.email, values.password, values.role, values.username);
+                    if (error) {
+                        return toast({
+                            position: "top",
+                            title: "Error!",
+                            description: error.message,
+                            status: "error",
+                            duration: 1500,
+                            isClosable: true,
+                        });
+                    }
+                    await new Promise((r) => setTimeout(r, 1500));
                     actions.setSubmitting(false);
                 }}
             >
@@ -77,20 +142,28 @@ export default function Register() {
                             {({ field, form }) => (
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.role && form.touched.role}>
                                     <FormLabel>Role</FormLabel>
-                                    {/* <Input boxShadow="md" focusBorderColor="palette.lime" type="email" {...field} placeholder="role" /> */}
                                     <Select boxShadow="md" focusBorderColor="palette.lime" {...field}>
-                                        <option defaultValue value="1">Personal</option>
+                                        <option defaultValue value="1">
+                                            Personal
+                                        </option>
                                         <option value="2">Company</option>
                                     </Select>
                                     <FormErrorMessage justifyContent={"end"}>{form.errors.role}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
-                        <Field name="username">
+                        <Field name="username" validate={validateUsername}>
                             {({ field, form }) => (
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.username && form.touched.username}>
                                     <FormLabel>Username</FormLabel>
-                                    <Input boxShadow="md" focusBorderColor="palette.lime" type="text" {...field} placeholder="username" />
+                                    <InputGroup>
+                                        <Input boxShadow="md" focusBorderColor="palette.lime" type="text" {...field} placeholder="username" />
+                                        <InputRightElement width="4.5rem">
+                                            <Button h="1.75rem" size="sm" disabled={validated} colorScheme={validated ? "green" : "gray"} onClick={validateUsername2}>
+                                                {validated ? <FontAwesomeIcon icon={solid.faCheck} /> : <FontAwesomeIcon icon={solid.faMagnifyingGlass} />}
+                                            </Button>
+                                        </InputRightElement>
+                                    </InputGroup>
                                     <FormErrorMessage justifyContent={"end"}>{form.errors.username}</FormErrorMessage>
                                 </FormControl>
                             )}
@@ -116,3 +189,5 @@ export default function Register() {
         </Container>
     );
 }
+
+// !!((await supabase.from("profiles").select("username").eq("username",value)).data[0])
