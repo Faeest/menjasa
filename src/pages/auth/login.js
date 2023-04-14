@@ -1,12 +1,13 @@
 import { Container, Box, Button, FormControl, FormLabel, Input, FormErrorMessage, InputGroup, InputRightElement, useColorMode, IconButton, ButtonGroup, Heading, Tooltip } from "@chakra-ui/react";
-import { listenAuth,redir } from "@/helpers/redirect.js";
+import { listenAuth, redir } from "@/helpers/redirect.js";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Field, Form, Formik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import ModeToggler from "@/components/ModeToggler";
-
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 export default function Login() {
     const validateEmail = (value) => {
             let error = !value
@@ -29,7 +30,6 @@ export default function Login() {
             });
         },
         [show, setShow] = useState(false),
-        { colorMode, toggleColorMode } = useColorMode(),
         handleClick = () => setShow(!show);
     return (
         <Container maxW={"md"} mt={"14"} h={"full"}>
@@ -43,15 +43,15 @@ export default function Login() {
                 }}
             >
                 {(props) => (
-                    <Form>
-                        <Heading fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
+                    <Form css={css(`display:flex;flex-wrap:wrap;`)}>
+                        <Heading w={"full"} fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
                             Login
                         </Heading>
                         <Field name="email" validate={validateEmail}>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
                                     <FormLabel>Email</FormLabel>
-                                    <Input boxShadow='md' focusBorderColor="palette.lime" type="email" {...field} placeholder="email" />
+                                    <Input boxShadow="md" focusBorderColor="palette.lime" type="email" {...field} placeholder="email" />
                                     <FormErrorMessage justifyContent={"end"}>{form.errors.email}</FormErrorMessage>
                                 </FormControl>
                             )}
@@ -61,7 +61,7 @@ export default function Login() {
                                 <FormControl mt={"1.5rem"} isInvalid={form.errors.password && form.touched.password}>
                                     <FormLabel>password</FormLabel>
                                     <InputGroup>
-                                        <Input boxShadow='md' focusBorderColor="palette.lime" type={show ? "text" : "password"} {...field} placeholder="password" />
+                                        <Input boxShadow="md" focusBorderColor="palette.lime" type={show ? "text" : "password"} {...field} placeholder="password" />
 
                                         <InputRightElement width="4.5rem">
                                             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -74,16 +74,16 @@ export default function Login() {
                             )}
                         </Field>
                         <ButtonGroup mt={"1.5rem"} justifyContent={"space-between"} w={"full"}>
-                            <Button colorScheme="teal" isLoading={props.isSubmitting} type="submit">
+                            <Button colorScheme="mint" isLoading={props.isSubmitting} type="submit">
                                 Login
                             </Button>
                             <ButtonGroup>
                                 <Tooltip hasArrow placement="top" label="Sign Up" bg="palette.dark" color="palette.light">
-                                <IconButton onClick={() => redir("/auth/register")} variant="outline" colorScheme="white" icon={<FontAwesomeIcon icon={solid.faPen} />} />
+                                    <IconButton borderRadius={"2sm"} onClick={() => redir("/auth/register")} variant="outline" colorScheme="tiffany" icon={<FontAwesomeIcon icon={solid.faPen} />} />
                                 </Tooltip>
                                 <Tooltip hasArrow placement="top" label="Theme" bg="palette.dark" color="palette.light">
                                     <Box overflow={"hidden"}>
-                                        <ModeToggler />
+                                        <ModeToggler borderRadius={"2sm"} />
                                     </Box>
                                 </Tooltip>
                             </ButtonGroup>
