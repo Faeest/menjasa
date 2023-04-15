@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { listenAuth } from "../helpers/redirect.js";
+import { Box, Container, FormLabel, Input } from "@chakra-ui/react";
+import ModeToggler from "./ModeToggler.js";
 
 export default function Account({ session }) {
     const supabase = useSupabaseClient();
@@ -30,7 +32,6 @@ export default function Account({ session }) {
                 setAvatarUrl(data.avatar_url);
             }
         } catch (error) {
-            alert("Error loading user data!");
             console.log(error);
         } finally {
             setLoading(false);
@@ -61,31 +62,32 @@ export default function Account({ session }) {
     }
 
     return (
-        <div className="form-widget">
-            <div>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="text" value={session.user.email} disabled />
-            </div>
-            <div>
-                <label htmlFor="username">Username</label>
-                <input id="username" type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="website">Website</label>
-                <input id="website" type="website" value={website || ""} onChange={(e) => setWebsite(e.target.value)} />
-            </div>
+        <Container className="form-widget">
+            <ModeToggler/>
+            <Box>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input boxShadow="md" focusBorderColor="palette.lime" id="email" type="text" value={session.user.email} disabled />
+            </Box>
+            <Box>
+                <FormLabel htmlFor="username">Username</FormLabel>
+                <Input boxShadow="md" focusBorderColor="palette.lime" id="username" type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
+            </Box>
+            <Box>
+                <FormLabel htmlFor="website">Website</FormLabel>
+                <Input boxShadow="md" focusBorderColor="palette.lime" id="website" type="website" value={website || ""} onChange={(e) => setWebsite(e.target.value)} />
+            </Box>
 
-            <div>
+            <Box>
                 <button className="button primary block" onClick={() => updateProfile({ username, website, avatar_url })} disabled={loading}>
                     {loading ? "Loading ..." : "Update"}
                 </button>
-            </div>
+            </Box>
 
-            <div>
+            <Box>
                 <button className="button block" onClick={() => supabase.auth.signOut()}>
                     Sign Out
                 </button>
-            </div>
-        </div>
+            </Box>
+        </Container>
     );
 }

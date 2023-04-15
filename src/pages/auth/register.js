@@ -4,7 +4,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Field, Form, Formik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModeToggler from "@/components/ModeToggler";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
@@ -30,7 +30,9 @@ export default function Register() {
                       .toLowerCase()
                       .match(/^[a-zA-Z0-9]+$/)
                 ? "Your username Isn't valid"
-                : value.length < 5? "Not long enough!" : undefined;
+                : value.length < 5
+                ? "Not long enough!"
+                : undefined;
             return error;
         },
         validateUsername2 = async () => {
@@ -67,21 +69,37 @@ export default function Register() {
                 options: {
                     data: {
                         role: role,
-                        username: username,
+                        uname: username,
                     },
-                    emailRedirectTo: "/app",
                 },
             });
         },
         [show, setShow] = useState(false),
         [username, setUsername] = useState(""),
         [validated, setValidated] = useState(false),
+        [option, setOption] = useState([]),
+        [keys, setKeys] = useState([]),
         toast = useToast(),
         handleClick = () => setShow(!show);
+    useEffect(() => {
+        supabase
+            .from("roles")
+            .select()
+            .then((e) => {
+                if (option.length >= Object.keys(e.data).length) return;
+                e.data.forEach((r) => {
+                    if (!keys.includes(r.id)) {
+                        option.push({ id: r.id, name: r.name });
+                        setOption([...option]);
+                        keys.push(r.id);
+                    }
+                });
+            });
+    }, [option]);
     return (
         <Container maxW={"md"} mt={"14"} h={"full"}>
             <Formik
-                initialValues={{ email: "", password: "", username: "" }}
+                initialValues={{ email: "", password: "", username: "", role: "" }}
                 onSubmit={async (values, actions) => {
                     if (!validated)
                         return toast({
@@ -143,10 +161,11 @@ export default function Register() {
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.role && form.touched.role}>
                                     <FormLabel>Role</FormLabel>
                                     <Select boxShadow="md" focusBorderColor="palette.lime" {...field}>
-                                        <option defaultValue value="1">
-                                            Personal
-                                        </option>
-                                        <option value="2">Company</option>
+                                        {option.map((e) => (
+                                            <option value={e.id} key={e.id}>
+                                                {e.name}
+                                            </option>
+                                        ))}
                                     </Select>
                                     <FormErrorMessage justifyContent={"end"}>{form.errors.role}</FormErrorMessage>
                                 </FormControl>

@@ -10,7 +10,7 @@ export function middleware(request = new NextRequest()) {
         },
         "/app": {
             session: true,
-            from: ["/auth/login"],
+            from: ["/auth/login","/auth/register","/auth"],
         },
     };
     const pathname = new URL(request.url).pathname;
