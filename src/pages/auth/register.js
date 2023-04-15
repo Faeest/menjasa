@@ -69,7 +69,7 @@ export default function Register() {
                 options: {
                     data: {
                         role: role,
-                        uname: username,
+                        user_name: username,
                     },
                 },
             });
