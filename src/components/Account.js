@@ -66,15 +66,15 @@ export default function Account({ session }) {
             <ModeToggler/>
             <Box>
                 <FormLabel htmlFor="email">Email</FormLabel>
-                <Input boxShadow="md" focusBorderColor="palette.lime" id="email" type="text" value={session.user.email} disabled />
+                <Input boxShadow="md" focusBorderColor="palette.mint" id="email" type="text" value={session.user.email} disabled />
             </Box>
             <Box>
                 <FormLabel htmlFor="username">Username</FormLabel>
-                <Input boxShadow="md" focusBorderColor="palette.lime" id="username" type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
+                <Input boxShadow="md" focusBorderColor="palette.mint" id="username" type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
             </Box>
             <Box>
                 <FormLabel htmlFor="website">Website</FormLabel>
-                <Input boxShadow="md" focusBorderColor="palette.lime" id="website" type="website" value={website || ""} onChange={(e) => setWebsite(e.target.value)} />
+                <Input boxShadow="md" focusBorderColor="palette.mint" id="website" type="website" value={website || ""} onChange={(e) => setWebsite(e.target.value)} />
             </Box>
 
             <Box>

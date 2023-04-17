@@ -128,14 +128,14 @@ export default function Register() {
             >
                 {(props) => (
                     <Form css={css(`display:flex;flex-wrap:wrap;justify-content:space-between`)}>
-                        <Heading w={"full"} fontWeight={"bold"} bgGradient="linear(to-r,palette.black 51%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 51%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
+                        <Heading w={"full"} fontWeight={"bold"} bgGradient="linear(to-r,palette.black 51%, palette.mint 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 51%, palette.tiffany 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
                             Register
                         </Heading>
                         <Field name="email" validate={validateEmail}>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
                                     <FormLabel>Email</FormLabel>
-                                    <Input boxShadow="md" focusBorderColor="palette.lime" type="email" {...field} placeholder="email" />
+                                    <Input boxShadow="md" focusBorderColor="palette.mint" type="email" {...field} placeholder="email" />
                                     <FormErrorMessage justifyContent={"end"}>{form.errors.email}</FormErrorMessage>
                                 </FormControl>
                             )}
@@ -145,7 +145,7 @@ export default function Register() {
                                 <FormControl mt={"1.5rem"} isInvalid={form.errors.password && form.touched.password}>
                                     <FormLabel>password</FormLabel>
                                     <InputGroup>
-                                        <Input boxShadow="md" focusBorderColor="palette.lime" type={show ? "text" : "password"} {...field} placeholder="password" />
+                                        <Input boxShadow="md" focusBorderColor="palette.mint" type={show ? "text" : "password"} {...field} placeholder="password" />
                                         <InputRightElement width="4.5rem">
                                             <Button h="1.75rem" size="sm" onClick={handleClick}>
                                                 {!show ? <FontAwesomeIcon icon={solid.faEye} /> : <FontAwesomeIcon icon={solid.faEyeSlash} />}
@@ -160,7 +160,7 @@ export default function Register() {
                             {({ field, form }) => (
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.role && form.touched.role}>
                                     <FormLabel>Role</FormLabel>
-                                    <Select boxShadow="md" focusBorderColor="palette.lime" {...field}>
+                                    <Select boxShadow="md" focusBorderColor="palette.mint" {...field}>
                                         {option.map((e) => (
                                             <option value={e.id} key={e.id}>
                                                 {e.name}
@@ -176,7 +176,7 @@ export default function Register() {
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.username && form.touched.username}>
                                     <FormLabel>Username</FormLabel>
                                     <InputGroup>
-                                        <Input boxShadow="md" focusBorderColor="palette.lime" type="text" {...field} placeholder="username" />
+                                        <Input boxShadow="md" focusBorderColor="palette.mint" type="text" {...field} placeholder="username" />
                                         <InputRightElement width="4.5rem">
                                             <Button h="1.75rem" size="sm" disabled={validated} colorScheme={validated ? "green" : "gray"} onClick={validateUsername2}>
                                                 {validated ? <FontAwesomeIcon icon={solid.faCheck} /> : <FontAwesomeIcon icon={solid.faMagnifyingGlass} />}

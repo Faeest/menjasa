@@ -44,14 +44,14 @@ export default function Login() {
             >
                 {(props) => (
                     <Form css={css(`display:flex;flex-wrap:wrap;`)}>
-                        <Heading w={"full"} fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.lime 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.blue 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
+                        <Heading w={"full"} fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.mint 50%)" _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.tiffany 50%)" }} bgClip="text" textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
                             Login
                         </Heading>
                         <Field name="email" validate={validateEmail}>
                             {({ field, form }) => (
                                 <FormControl isInvalid={form.errors.email && form.touched.email}>
                                     <FormLabel>Email</FormLabel>
-                                    <Input boxShadow="md" focusBorderColor="palette.lime" type="email" {...field} placeholder="email" />
+                                    <Input boxShadow="md" focusBorderColor="palette.mint" type="email" {...field} placeholder="email" />
                                     <FormErrorMessage justifyContent={"end"}>{form.errors.email}</FormErrorMessage>
                                 </FormControl>
                             )}
@@ -61,7 +61,7 @@ export default function Login() {
                                 <FormControl mt={"1.5rem"} isInvalid={form.errors.password && form.touched.password}>
                                     <FormLabel>password</FormLabel>
                                     <InputGroup>
-                                        <Input boxShadow="md" focusBorderColor="palette.lime" type={show ? "text" : "password"} {...field} placeholder="password" />
+                                        <Input boxShadow="md" focusBorderColor="palette.mint" type={show ? "text" : "password"} {...field} placeholder="password" />
 
                                         <InputRightElement width="4.5rem">
                                             <Button h="1.75rem" size="sm" onClick={handleClick}>

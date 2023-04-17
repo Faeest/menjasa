@@ -32,20 +32,20 @@ export default function ErrorHandler({ type }) {
                         <Text fontSize={{ base: "3xl", sm: "6xl" }} fontWeight={"bold"} color={"palette.dark"}>
                             Error
                         </Text>
-                        <Text fontSize={{ base: "3xl", sm: "6xl" }} fontWeight={"extrabold"} marginLeft={2} color={"palette.lime"}>
+                        <Text fontSize={{ base: "3xl", sm: "6xl" }} fontWeight={"extrabold"} marginLeft={2} color={"palette.mint"}>
                             {type ? type : "Not recognized"}
                         </Text>
                         <Text fontSize={{ base: "3xl", sm: "6xl" }} fontWeight={"bold"} marginLeft={2} color={"palette.dark"}>
                             !
                         </Text>
                     </HStack>
-                    <Text fontSize={{ base: "2xl", sm: "4xl" }} borderTop={"2px"} color={"palette.lime"} css={css(`margin-left:0px !important;`)} fontWeight={"bold"}>
+                    <Text fontSize={{ base: "2xl", sm: "4xl" }} borderTop={"2px"} color={"palette.mint"} css={css(`margin-left:0px !important;`)} fontWeight={"bold"}>
                         {datas[type]?.title ? datas[type]?.title : "This error is not recognized by the server"}
                     </Text>
                     <Text fontSize={{ base: "lg", sm: "xl" }} w={"full"} color={"palette.dark"} css={css(`margin-left:0px !important;margin-top:1rem !important;`)} fontWeight={"semibold"}>
                         {datas[type]?.desc ? datas[type]?.desc : "Reach the developer for further information / report."}
                     </Text>
-                    <Button onClick={() => Router.back()} css={css(`margin-left:0px !important;margin-top:1rem !important;`)} variant="outline" fontWeight={700} color={"palette.lime"} border={"2px"} borderColor={"palette.lime"} size="lg" _hover={{ bg: "palette.lime", color: "palette.white" }} _active={{ bg: "palette.black", borderColor: "palette.black" }}>
+                    <Button onClick={() => Router.back()} css={css(`margin-left:0px !important;margin-top:1rem !important;`)} variant="outline" fontWeight={700} color={"palette.mint"} border={"2px"} borderColor={"palette.mint"} size="lg" _hover={{ bg: "palette.mint", color: "palette.white" }} _active={{ bg: "palette.black", borderColor: "palette.black" }}>
                         Go Back
                     </Button>
                 </HStack>

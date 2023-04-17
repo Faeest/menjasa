@@ -63,8 +63,8 @@ function App({ Component, pageProps }) {
                 900: "#0C2723",
             },
             palette: {
-                lime: "#1abc9c",
-                blue: "#7fd8cc",
+                mint: "#1abc9c",
+                tiffany: "#7fd8cc",
                 dark: "#1f2d3d",
                 black: "#2c3e50",
                 light: "#e9ecef",
