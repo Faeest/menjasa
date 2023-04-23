@@ -6,6 +6,7 @@ import { css } from "@emotion/react";
 import { listenAuth, redir } from "@/helpers/redirect.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
+import NavbarLink from "./Navbarlink.js";
 
 /** @jsxImportSource @emotion/react */
 
@@ -20,15 +21,15 @@ export default function Navbar() {
             </Link>
 
             <ul href="/about-us"  css={css(`list-style:none;display:flex;gap:3rem;`)}>
-                <li><Link _hover={{textDecoration: 'none'}} href="/">About us</Link></li>
-                <li className="drophover"><Link _hover={{textDecoration: 'none'}} href="/">FAQ</Link>
+                <li><NavbarLink href="/">About us</NavbarLink></li>
+                <li className="drophover"><NavbarLink href="/">FAQ</NavbarLink>
                 <Box className="menu">
-                    <Link _hover={{textDecoration: 'none'}} href="/">Test</Link>
+                    <NavbarLink href="/">Test</NavbarLink>
                 </Box>
 
                 </li>
-                <li><Link _hover={{textDecoration: 'none'}} href="/">Job</Link></li>
-                <li><Link _hover={{textDecoration: 'none'}} href="/">Talent Finder</Link></li>
+                <li><NavbarLink href="/">Job</NavbarLink></li>
+                <li><NavbarLink href="/">Talent Finder</NavbarLink></li>
             </ul>
             
             <ButtonGroup>
