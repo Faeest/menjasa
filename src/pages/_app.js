@@ -97,7 +97,7 @@ function App({ Component, pageProps }) {
                 dark: "#1f2d3d",
                 black: "#2c3e50",
                 light: "#e9ecef",
-                white: "#f8f9fa",
+                white: "#ffff",
             },
         },
     });

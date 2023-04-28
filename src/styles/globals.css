@@ -118,3 +118,6 @@ a {
     padding: 0 60px 0 30px;
 }
 /* .drophover:hover .menu{display: block;} */
+.bg-footer {
+    background: linear-gradient(90deg, #1F2D3D 0%, #1ABC9C 100%)
+}

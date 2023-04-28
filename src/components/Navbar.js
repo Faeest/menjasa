@@ -3,7 +3,6 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import ModeToggler from "./ModeToggler";
-import NavbarLink from "./Navbarlink";
 import { Button, Collapse, IconButton, useBoolean, useColorMode, useDisclosure } from "@chakra-ui/react";
 
 const navigation = [
@@ -23,7 +22,7 @@ export default function Navbar() {
     return (
         <nav className="bg-white drop-shadow-sm">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
-                <div className="relative flex h-16 items-center justify-between">
+                <div className="relative flex h-16 items-center justify-between gap-[25px]">
                     {/* Profile dropdown */}
                     <Menu as="div" className="absolute lg:right-0 md:right-0 pl-2">
                         <ModeToggler variant="ghost" />
@@ -43,12 +42,32 @@ export default function Navbar() {
                                 ))}
                             </div>
                         </div>
+                        <div className="hidden lg:block md:hidden sm:hidden items-center">
+                            <Button 
+                              as="a" 
+                              href="login" 
+                              className="mr-4 text-center"
+                              fontSize="14px"
+                              px="30px"
+                              colorScheme="tiffany"
+                              color="palette.white"
+                              fontWeight="500"
+                            >Login</Button>
+                            <Button 
+                              as="a" 
+                              href="register" 
+                              variant="outline"
+                              colorScheme="black"
+                              fontSize="14px"
+                              px="25px"
+                              _hover={{backgroundColor:"palette.mint", color:"palette.white"}}
+                            >Sign Up</Button>
+                        </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div className="relative flex items-center sm:hidden">
                             {/* Mobile menu button*/}
                             <IconButton onClick={onToggle} variant={"ghost"} colorScheme={colorMode === "light" ? "gray" : "flash"} className="inline-flex items-center justify-center rounded-md">
-                                {/* <span className="sr-only">Open main menu</span> */}
                                 <FontAwesomeIcon icon={solid.faBars} />
                             </IconButton>
                         </div>
@@ -65,6 +84,7 @@ export default function Navbar() {
                     ))}
                 </div>
             </Collapse>
+
         </nav>
     );
 }
