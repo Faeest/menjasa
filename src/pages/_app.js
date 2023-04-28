@@ -1,13 +1,18 @@
 import "../styles/globals.css";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { useState } from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { ChakraProvider, useColorMode } from "@chakra-ui/react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { extendTheme } from "@chakra-ui/react";
+import { Html } from "next/document";
 
 function App({ Component, pageProps }) {
     const [supabase] = useState(() => createBrowserSupabaseClient());
+    const { colorMode, toggleColorMode } = useColorMode();
+    useEffect((e) => {
+        console.log("fired " + colorMode);
+    },[colorMode]);
     const theme = extendTheme({
         radii: {
             "2sm": ".25rem",
@@ -26,6 +31,30 @@ function App({ Component, pageProps }) {
                 700: "#344B65",
                 800: "#223244",
                 900: "#111922",
+            },
+            charcoal: {
+                50: "#EFF2F6",
+                100: "#D1DBE6",
+                200: "#B3C4D5",
+                300: "#96ADC5",
+                400: "#7896B5",
+                500: "#5A7FA5",
+                600: "#486684",
+                700: "#364C63",
+                800: "#243342",
+                900: "#121921",
+            },
+            flash: {
+                50: "#F0F2F4",
+                100: "#D6DBE1",
+                200: "#BBC4CE",
+                300: "#A1ADBA",
+                400: "#8696A7",
+                500: "#6B8094",
+                600: "#566676",
+                700: "#404D59",
+                800: "#2B333B",
+                900: "#151A1E",
             },
             teal: {
                 100: "#99e2b4",
@@ -77,11 +106,6 @@ function App({ Component, pageProps }) {
             <ChakraProvider theme={theme}>
                 <ErrorBoundary>
                     <Component {...pageProps} />
-                    <style jsx global>{`
-                        body {
-                            min-height: 100vh !important;
-                        }
-                    `}</style>
                 </ErrorBoundary>
             </ChakraProvider>
         </SessionContextProvider>

@@ -5,5 +5,5 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function ModeToggler(props) {
     const { colorMode, toggleColorMode } = useColorMode();
 
-    return <IconButton {...props} variant={props.outline ?? "outline"} colorScheme={colorMode === "light" ? "gunmetal" : "orange"} onClick={toggleColorMode} icon={colorMode === "light" ? <FontAwesomeIcon icon={solid.faMoon} /> : <FontAwesomeIcon icon={solid.faSun} />} />;
+    return <IconButton {...props} variant={props.variant ?? "outline"} colorScheme={colorMode === "light" ? "gunmetal" : "orange"} onClick={toggleColorMode} icon={colorMode === "light" ? <FontAwesomeIcon icon={solid.faMoon} /> : <FontAwesomeIcon icon={solid.faSun} />} />;
 }
