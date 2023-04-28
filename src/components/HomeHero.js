@@ -44,8 +44,7 @@ export default function HomeHero () {
             </Stack>
 
             <Button
-              backgroundColor="palette.dark"
-              color="white"
+              colorScheme="gunmetal"
               fontWeight="500"
             >
               Search
