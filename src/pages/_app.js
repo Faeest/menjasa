@@ -8,6 +8,13 @@ import { extendTheme } from "@chakra-ui/react";
 import { Html } from "next/document";
 
 function App({ Component, pageProps }) {
+    useEffect(() => {
+        if (localStorage["chakra-ui-color-mode"] === "dark" || (!("chakra-ui-color-mode" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    }, []);
     const [supabase] = useState(() => createBrowserSupabaseClient());
     const theme = extendTheme({
         radii: {

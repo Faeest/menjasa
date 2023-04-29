@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import ModeToggler from "@/components/ModeToggler";
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 export default function Login() {
     const validateEmail = (value) => {
