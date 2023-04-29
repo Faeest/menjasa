@@ -6,6 +6,9 @@
     .navlink {
       @apply duration-200 hover:bg-antiflash dark:hover:bg-gunmetal;
     }
+    * {
+      @apply transition;
+    }
   }
 :root {
     --max-width: 1100px;

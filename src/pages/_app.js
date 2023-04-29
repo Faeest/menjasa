@@ -9,10 +9,6 @@ import { Html } from "next/document";
 
 function App({ Component, pageProps }) {
     const [supabase] = useState(() => createBrowserSupabaseClient());
-    const { colorMode, toggleColorMode } = useColorMode();
-    useEffect((e) => {
-        console.log("fired " + colorMode);
-    },[colorMode]);
     const theme = extendTheme({
         radii: {
             "2sm": ".25rem",
