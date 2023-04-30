@@ -6,7 +6,7 @@
     .navlink {
       @apply duration-200 hover:bg-antiflash dark:hover:bg-charcoal;
     }
-    * {
+    *:not(.chakra-portal > *) {
       @apply transition;
     }
   }

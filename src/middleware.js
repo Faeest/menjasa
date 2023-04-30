@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 export function middleware(request = new NextRequest()) {
-    return NextResponse.next();
-
     let session = request.cookies.get("supabase-auth-token") ? true : false;
     const list = {
         "/auth/login": {

@@ -72,4 +72,101 @@
             )}
         </Menu.Item>
     </Menu.Items>
-    </m(Transition)
+    </m(Transition) <div className="bg-white max-w-sm rounded-md overflow-hidden shadow-lg px-8 py-6">
+    <Image className="w-[100px] mb-3" src="/images/c-logo.png" alt="logo-company-hires"></Image>
+    <div className="flex gap-1 mb-2">
+        <Tag backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
+        <Tag backgroundColor="palette.dark" color="white">Analyis</Tag>
+    </div>
+    <div className="font-bold text-xl mb-2">Software Engineer & Spesialist Data Analyis </div>
+    <p className="text-gray-700 text-base">
+        Requirment : <br />
+
+        Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
+    </p>
+    <Button color="palette.white" className="mt-2" colorScheme="tiffany" fontWeight="500">Go Apply</Button>
+    </div>
+    <div className="bg-white max-w-sm rounded-md overflow-hidden shadow-lg px-8 py-6">
+        <Image className="w-[100px] mb-3" src="/images/c-logo.png" alt="logo-company-hires"></Image>
+        <div className="flex gap-1 mb-2">
+            <Tag backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
+            <Tag backgroundColor="palette.dark" color="white">Analyis</Tag>
+        </div>
+        <div className="font-bold text-xl mb-2">Software Engineer & Spesialist Data Analyis </div>
+        <p className="text-gray-700 text-base">
+            Requirment : <br />
+
+            Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
+        </p>
+        <Button className="mt-2" colorScheme="tiffany" color="palette.white" fontWeight="500">Go Apply</Button>
+    </div>
+    <div className="bg-white max-w-sm rounded-md overflow-hidden shadow-lg px-8 py-6">
+        <Image className="w-[100px] mb-3" src="/images/c-logo.png" alt="logo-company-hires"></Image>
+        <div className="flex gap-1 mb-2">
+            <Tag backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
+            <Tag backgroundColor="palette.dark" color="white">Analyis</Tag>
+        </div>
+        <div className="font-bold text-xl mb-2">Software Engineer & Spesialist Data Analyis </div>
+        <p className="text-gray-700 text-base">
+            Requirment : <br />
+
+            Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
+        </p>
+        <Button className="mt-2" colorScheme="tiffany" color="palette.white" fontWeight="500">Go Apply</Button>
+    </div>
+
+    // login form
+
+    <Form css={css(`display:flex;flex-wrap:wrap;`)}>
+        <Heading w={"full"} fontWeight={"bold"} bgGradient="linear(to-r,palette.black 54%, palette.mint 50%)"
+            _dark={{ bgGradient: "linear(to-r,palette.light 54%, palette.tiffany 50%)" }} bgClip="text"
+            textAlign={"center"} as="h1" size="2xl" pb={"1rem"}>
+            Login
+        </Heading>
+        <Field name="email" validate={validateEmail}>
+            {({ field, form }) => (
+            <FormControl isInvalid={form.errors.email && form.touched.email}>
+                <FormLabel>Email</FormLabel>
+                <Input boxShadow="md" focusBorderColor="palette.mint" type="email" {...field} placeholder="email" />
+                <FormErrorMessage justifyContent={"end"}>{form.errors.email}</FormErrorMessage>
+            </FormControl>
+            )}
+        </Field>
+        <Field name="password" validate={validatePass}>
+            {({ field, form }) => (
+            <FormControl mt={"1.5rem"} isInvalid={form.errors.password && form.touched.password}>
+                <FormLabel>password</FormLabel>
+                <InputGroup>
+                    <Input boxShadow="md" focusBorderColor="palette.mint" type={show ? "text" : "password" } {...field}
+                        placeholder="password" />
+
+                    <InputRightElement width="4.5rem">
+                        <Button h="1.75rem" size="sm" onClick={handleClick}>
+                            {!show ?
+                            <FontAwesomeIcon icon={solid.faEye} /> :
+                            <FontAwesomeIcon icon={solid.faEyeSlash} />}
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+                <FormErrorMessage justifyContent={"end"}>{form.errors.password}</FormErrorMessage>
+            </FormControl>
+            )}
+        </Field>
+        <ButtonGroup mt={"1.5rem"} justifyContent={"space-between"} w={"full"}>
+            <Button colorScheme="mint" isLoading={props.isSubmitting} type="submit">
+                Login
+            </Button>
+            <ButtonGroup>
+                <Tooltip hasArrow placement="top" label="Sign Up" bg="palette.dark" color="palette.light">
+                    <IconButton borderRadius={"2sm"} onClick={()=> redir("/auth/register")} variant="outline"
+                        colorScheme="tiffany" icon={
+                        <FontAwesomeIcon icon={solid.faPen} />} />
+                </Tooltip>
+                <Tooltip hasArrow placement="top" label="Theme" bg="palette.dark" color="palette.light">
+                    <Box overflow={"hidden"}>
+                        <ModeToggler borderRadius={"2sm"} />
+                    </Box>
+                </Tooltip>
+            </ButtonGroup>
+        </ButtonGroup>
+    </Form>

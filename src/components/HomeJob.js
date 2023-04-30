@@ -1,4 +1,4 @@
-import { Button, Image, Tag } from "@chakra-ui/react"
+import { Button, Image, Tag, Card, CardHeader, CardBody, CardFooter, Stack, Heading, Divider, ButtonGroup, Text } from "@chakra-ui/react"
 
 export default function HomeJob() {
 
@@ -11,64 +11,38 @@ export default function HomeJob() {
                     <a className="underline underline-offset-2 text-sm hover:text-blue-600" href="">View more</a>
                 </div>
                 <div className="lg:col-span-3 py-4 lg:py-0 sm:py-4">
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">
-                        <div className="bg-white max-w-sm rounded-md overflow-hidden shadow-lg px-8 py-6">
-                            <Image className="w-[100px] mb-3" src="/images/c-logo.png" alt="logo-company-hires"></Image>
-                            <div className="flex gap-1 mb-2">
-                                <Tag backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
-                                <Tag backgroundColor="palette.dark" color="white">Analyis</Tag>
+                    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
+                    <Card maxW='sm' className="left-0 top-0 m-auto">
+                        <CardBody backgroundColor="#ffff" className="rounded-md">
+                            <Image
+                            src='/images/c-logo.png'
+                            alt='logo-company'
+                            borderRadius='lg'
+                            w="120px"
+                            />
+                            <div className="flex mt-4 mb-4 gap-1">
+                                <Tag as="a" href="name-tag" backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
+                                <Tag as="a" href="name-tag" backgroundColor="palette.dark" color="white">Analyis</Tag>
                             </div>
-                            <div className="font-bold text-xl mb-2">Software Engineer & Spesialist Data Analyis </div>
-                            <p className="text-gray-700 text-base">
-                            Requirment : <br />
+                                
+                            <Heading 
+                              fontSize="24px" >Software Engineer & Spesialist Data Analyis</Heading>
+                            <Text 
+                              className="mt-4">
+                                Requirment : <br />
 
-                            Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
-                            </p>
-                            <Button 
-                              color="palette.white"
-                              className="mt-2"
-                              colorScheme="tiffany"
-                              fontWeight="500"
-                            >Go Apply</Button>
-                        </div>                    
-                        <div className="bg-white max-w-sm rounded-md overflow-hidden shadow-lg px-8 py-6">
-                            <Image className="w-[100px] mb-3" src="/images/c-logo.png" alt="logo-company-hires"></Image>
-                            <div className="flex gap-1 mb-2">
-                                <Tag backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
-                                <Tag backgroundColor="palette.dark" color="white">Analyis</Tag>
-                            </div>
-                            <div className="font-bold text-xl mb-2">Software Engineer & Spesialist Data Analyis </div>
-                            <p className="text-gray-700 text-base">
-                            Requirment : <br />
-
-                            Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
-                            </p>
-                            <Button 
-                              className="mt-2"
-                              colorScheme="tiffany"
-                              color="palette.white"
-                              fontWeight="500"
-                            >Go Apply</Button>
-                        </div>                    
-                        <div className="bg-white max-w-sm rounded-md overflow-hidden shadow-lg px-8 py-6">
-                            <Image className="w-[100px] mb-3" src="/images/c-logo.png" alt="logo-company-hires"></Image>
-                            <div className="flex gap-1 mb-2">
-                                <Tag backgroundColor="palette.dark" color="#ffff">Programmer</Tag>
-                                <Tag backgroundColor="palette.dark" color="white">Analyis</Tag>
-                            </div>
-                            <div className="font-bold text-xl mb-2">Software Engineer & Spesialist Data Analyis </div>
-                            <p className="text-gray-700 text-base">
-                            Requirment : <br />
-
-                            Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
-                            </p>
-                            <Button 
-                              className="mt-2"
-                              colorScheme="tiffany"
-                              color="palette.white"
-                              fontWeight="500"
-                            >Go Apply</Button>
-                        </div>                    
+                                Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
+                                </Text>
+                            <Button  
+                              borderRadius={"sm"} 
+                              color="palette.white" 
+                              className="mt-3" 
+                              colorScheme="mint"
+                              fontWeight="500" 
+                              fontSize="14px" 
+                            >Apply Now</Button>
+                        </CardBody>
+                    </Card>                              
                     </div>
                 </div>
             </div>

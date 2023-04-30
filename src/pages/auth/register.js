@@ -107,10 +107,11 @@ export default function Register() {
                             title: "Error!",
                             description: "Validate you username first!",
                             status: "error",
-                            duration: 1500,
+                            duration: 2250,
                             isClosable: true,
                         });
                     listenAuth(supabase);
+                    console.log(values);
                     let { error, data } = await signUp(values.email, values.password, values.role, values.username);
                     if (error) {
                         return toast({
@@ -118,11 +119,11 @@ export default function Register() {
                             title: "Error!",
                             description: error.message,
                             status: "error",
-                            duration: 1500,
+                            duration: 2250,
                             isClosable: true,
                         });
                     }
-                    await new Promise((r) => setTimeout(r, 1500));
+                    await new Promise((r) => setTimeout(r, 2250));
                     actions.setSubmitting(false);
                 }}
             >
@@ -156,12 +157,12 @@ export default function Register() {
                                 </FormControl>
                             )}
                         </Field>
-                        <Field name="role">
+                        <Field name="role" type="option" >
                             {({ field, form }) => (
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.role && form.touched.role}>
                                     <FormLabel>Role</FormLabel>
                                     <Select boxShadow="md" focusBorderColor="palette.mint" {...field}>
-                                        {option.map((e) => (
+                                        {option.map((e,x) => (
                                             <option value={e.id} key={e.id}>
                                                 {e.name}
                                             </option>
