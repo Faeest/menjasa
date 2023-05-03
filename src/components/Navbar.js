@@ -20,7 +20,7 @@ export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure(),
         { colorMode, toggleColorMode } = useColorMode();
     return (
-        <nav className="bg-white dark:bg-gunmetal drop-shadow-sm sticky">
+        <nav className="bg-white dark:bg-gunmetal drop-shadow-sm sticky z-50 top-0">
             <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8 ">
                 <div className="relative flex h-16 items-center justify-between gap-[25px]">
                     {/* Profile dropdown */}

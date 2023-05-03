@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { ChakraProvider, useColorMode } from "@chakra-ui/react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { extendTheme } from "@chakra-ui/react";
-import { Html } from "next/document";
 
 function App({ Component, pageProps }) {
     useEffect(() => {
