@@ -14,6 +14,7 @@ function App() {
     const supabase = useSupabaseClient();
     return (
         <>
+        <Account></Account>
             <ButtonGroup>
         <Tooltip hasArrow placement="top" label="Theme" bg="palette.dark" color="palette.light">
             <Box overflow={"hidden"}>

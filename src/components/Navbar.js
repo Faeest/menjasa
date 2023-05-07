@@ -46,10 +46,10 @@ export default function Navbar() {
                         </div>
                         <div className="hidden lg:block md:hidden items-center">
                             <LightMode>
-                                <Button borderRadius={"sm"} as="a" href="login" className="mr-4" fontSize="14px" px="30px" colorScheme="mint" color="palette.white" fontWeight="500">
+                                <Button borderRadius={"sm"} as="a" href="/auth/login" className="mr-4" fontSize="14px" px="30px" colorScheme="mint" color="palette.white" fontWeight="500">
                                     Login
                                 </Button>
-                                <Button as="a" href="register" borderRadius={"sm"} variant="outline" colorScheme="mint" color="palette.mint" fontSize="14px" px="25px" _hover={{ backgroundColor: "palette.mint", color: "palette.white", borderColor:"transparent" }}>
+                                <Button as="a" href="/auth/register" borderRadius={"sm"} variant="outline" colorScheme="mint" color="palette.mint" fontSize="14px" px="25px" _hover={{ backgroundColor: "palette.mint", color: "palette.white", borderColor:"transparent" }}>
                                     Sign Up
                                 </Button>
                             </LightMode>

@@ -15,11 +15,15 @@ export default function Account({ session }) {
     useEffect(() => {
         getProfile();
     }, [session]);
-
+    return;
     async function getProfile() {
         try {
             setLoading(true);
-
+        //     let { data, error, status } = await supabase.from("jobs").select(`
+        //     id, 
+        //     title, 
+        //     tags ( id, name )
+        //   `);
             let { data, error, status } = await supabase.from("profiles").select(`username, website, avatar_url`).eq("id", user.id).single();
 
             if (error && status !== 406) {
@@ -63,7 +67,7 @@ export default function Account({ session }) {
 
     return (
         <Container className="form-widget">
-            <ModeToggler/>
+            <ModeToggler />
             <Box>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input boxShadow="md" focusBorderColor="palette.mint" id="email" type="text" value={session.user.email} disabled />

@@ -17,6 +17,7 @@ export default function HomeHero () {
                 children={<FontAwesomeIcon icon={solid.faMagnifyingGlass} style={{ color: "#acacac"}} />}
               />
               <Input 
+                variant='outline'
                 placeholder="Find by name here..."
               ></Input>
               </InputGroup>
@@ -38,6 +39,7 @@ export default function HomeHero () {
                 children={<FontAwesomeIcon icon={solid.faCity} style={{ color: "#acacac"}} />}
               />
               <Input 
+                variant='outline'
                 placeholder="Find by city here..."
               ></Input>
               </InputGroup>

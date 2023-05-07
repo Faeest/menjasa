@@ -51,7 +51,7 @@ export default function Login() {
         const { colorMode } = useColorMode();
 
     return (
-        <div className="mx-auto">
+        <div className="mx-auto bg-white dark:bg-gunmetal">
             <Formik
                 initialValues={{ email: "", password: "" }}
                 onSubmit={async (values, actions) => {

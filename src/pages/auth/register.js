@@ -110,8 +110,10 @@ export default function Register() {
                             duration: 2250,
                             isClosable: true,
                         });
+                    if (values.role == "") {
+                        values.role = option[0].id
+                    }
                     listenAuth(supabase);
-                    console.log(values);
                     let { error, data } = await signUp(values.email, values.password, values.role, values.username);
                     if (error) {
                         return toast({
@@ -157,12 +159,12 @@ export default function Register() {
                                 </FormControl>
                             )}
                         </Field>
-                        <Field name="role" type="option" >
+                        <Field name="role" type="option">
                             {({ field, form }) => (
                                 <FormControl mt={"1.5rem"} w={"48%"} isInvalid={form.errors.role && form.touched.role}>
                                     <FormLabel>Role</FormLabel>
                                     <Select boxShadow="md" focusBorderColor="palette.mint" {...field}>
-                                        {option.map((e,x) => (
+                                        {option.map((e, x) => (
                                             <option value={e.id} key={e.id}>
                                                 {e.name}
                                             </option>
