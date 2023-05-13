@@ -1,9 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import ModeToggler from "./ModeToggler";
 import { Button, Collapse, IconButton, LightMode, useBoolean, useColorMode, useDisclosure } from "@chakra-ui/react";
+import { useSession, useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { listenAuth } from "@/helpers/redirect";
 
 const navigation = [
     { name: "Home", href: "#", current: true },
@@ -18,7 +20,29 @@ function classNames(...classes) {
 
 export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure(),
-        { colorMode, toggleColorMode } = useColorMode();
+        { colorMode, toggleColorMode } = useColorMode(),
+        [loading, setLoading] = useState(true),
+        supabase = useSupabaseClient(),
+        user = useUser(),
+        session = useSession();
+    listenAuth(supabase);
+    useEffect(() => {
+        getProfile();
+    }, [session]);
+    async function getProfile() {
+        try {
+            setLoading(true);
+            let { data, error, status } = await supabase.from("profiles").select(`username, avatar_url, role (name), jobs (title, description, slug, type, salary, tags(name, categories(name)))`).eq("id", user.id).single();
+            if (error && status !== 406) throw error;
+            if (data) {
+                // 
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
     return (
         <nav className="bg-white dark:bg-gunmetal drop-shadow-sm sticky z-50 top-0">
             <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8 ">
@@ -49,7 +73,7 @@ export default function Navbar() {
                                 <Button borderRadius={"sm"} as="a" href="/auth/login" className="mr-4" fontSize="14px" px="30px" colorScheme="mint" color="palette.white" fontWeight="500">
                                     Login
                                 </Button>
-                                <Button as="a" href="/auth/register" borderRadius={"sm"} variant="outline" colorScheme="mint" color="palette.mint" fontSize="14px" px="25px" _hover={{ backgroundColor: "palette.mint", color: "palette.white", borderColor:"transparent" }}>
+                                <Button as="a" href="/auth/register" borderRadius={"sm"} variant="outline" colorScheme="mint" color="palette.mint" fontSize="14px" px="25px" _hover={{ backgroundColor: "palette.mint", color: "palette.white", borderColor: "transparent" }}>
                                     Sign Up
                                 </Button>
                             </LightMode>

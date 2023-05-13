@@ -8,31 +8,32 @@ import RedirectHelper from "@/helpers/redirect.js";
 import LoadingScreen from "@/components/LoadingScreen";
 import { listenAuth, redir } from "@/helpers/redirect.js";
 import ModeToggler from "@/components/ModeToggler";
+import Navbar from "@/components/Navbar";
 
 function App() {
-
     const supabase = useSupabaseClient();
     return (
         <>
-        <Account></Account>
+            <Navbar />
             <ButtonGroup>
-        <Tooltip hasArrow placement="top" label="Theme" bg="palette.dark" color="palette.light">
-            <Box overflow={"hidden"}>
-                <ModeToggler borderRadius={"2sm"} />
-            </Box>
-        </Tooltip>
-        <Tooltip hasArrow placement="top" label="Log Out" bg="palette.dark" color="palette.light">
-            <IconButton borderRadius={"2sm"} colorScheme="mint" onClick={async ()=> {
-                await supabase.auth.signOut();
-                redir("/auth/login");
-                }}
-                variant="outline"
-                icon={
-                <FontAwesomeIcon icon={solid.faRightFromBracket} />}
-                />
-        </Tooltip>
-    </ButtonGroup>
-            
+                <Tooltip hasArrow placement="top" label="Theme" bg="palette.dark" color="palette.light">
+                    <Box overflow={"hidden"}>
+                        <ModeToggler borderRadius={"2sm"} />
+                    </Box>
+                </Tooltip>
+                <Tooltip hasArrow placement="top" label="Log Out" bg="palette.dark" color="palette.light">
+                    <IconButton
+                        borderRadius={"2sm"}
+                        colorScheme="mint"
+                        onClick={async () => {
+                            await supabase.auth.signOut();
+                            redir("/auth/login");
+                        }}
+                        variant="outline"
+                        icon={<FontAwesomeIcon icon={solid.faRightFromBracket} />}
+                    />
+                </Tooltip>
+            </ButtonGroup>
         </>
     );
 }

@@ -19,11 +19,13 @@ export default function Account({ session }) {
     async function getProfile() {
         try {
             setLoading(true);
-        //     let { data, error, status } = await supabase.from("jobs").select(`
-        //     id, 
-        //     title, 
-        //     tags ( id, name )
-        //   `);
+            // let { data, error, status } = await supabase.from("jobs").select(`
+            //     id, 
+            //     title, 
+            //     tags ( id, name, categories ( id, name ) )
+            // `);
+            // console.log(data);
+            // return
             let { data, error, status } = await supabase.from("profiles").select(`username, website, avatar_url`).eq("id", user.id).single();
 
             if (error && status !== 406) {
