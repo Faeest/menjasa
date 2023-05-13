@@ -3,7 +3,7 @@ import { Button, Image, Tag, Card, CardHeader, CardBody, CardFooter, Stack, Head
 export default function HomeJob() {
 
     return (
-        <div className="contianer mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-10">
+        <div className="container mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-10">
             <div className="grid lg:grid-cols-4 md:grid-cols-1 sm:grid-cols-1">
                 <div className="lg:max-w-xs text-center lg:text-left md:text-center sm:text-center">
                     <h5 className="text-mint text-md font-medium mb-1 md:text-xl sm:text-sm">Trending Job !</h5>
@@ -29,8 +29,6 @@ export default function HomeJob() {
                               fontSize="24px" >Software Engineer & Spesialist Data Analyis</Heading>
                             <Text 
                               className="mt-4">
-                                Requirment : <br />
-
                                 Our state-of-the-art technology and advanced filtering options enable you to find the perfect[...]
                                 </Text>
                             <Button  

@@ -8,7 +8,7 @@ export default function HomeHero () {
         <div className="container mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8 text-center lg:text-left md:text-center sm:text-center">
           <h1 className="text-antiflash lg:mt-6 sm:mt-0 lg:max-w-2xl font-bold text-xl lg:text-[40px] leading-relaxed md:text-[32px] sm:text-[32px]">Discover Your True Potential With TalentFinder - Your Ultimate Platform for Finding The Perfect Job Match</h1>
           <p className="text-antiflash font-regular lg:text-left text-sm lg:max-w-xl mb-8 md:text-[16px]">Welcome to TalentFinder, where we believe that everyone has unique talents that deserve to be recognized and celebrated. We're not just a job search platform</p>
-          <div className="bg-antiflash dark:bg-gunmetal p-7 shadow-md rounded-md grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1 mb-6">
+          <div className="bg-white dark:bg-gunmetal p-7 shadow-md rounded-md grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1 mb-6">
             <Stack spacing={3}
             >
               <InputGroup>
