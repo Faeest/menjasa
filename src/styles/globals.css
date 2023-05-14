@@ -6,8 +6,8 @@
     .navlink {
       @apply duration-200 hover:bg-antiflash dark:hover:bg-charcoal;
     }
-    *:not(.chakra-portal > *):not(div:has([role=menu])):not([role=menu]) {
-      @apply transition;
+    *:not(.chakra-portal > *):not(.chakra-portal):not(div:has([role=menu])):not([role=menu]) {
+      @apply transition-colors;
     }
   }
 :root {

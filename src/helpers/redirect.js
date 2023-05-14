@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
-import { useSession } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 
 export default function RedirectHelper() {
     return;
@@ -33,6 +33,7 @@ export async function redir(url = "/") {
 }
 export async function listenAuth(supabase) {
     return supabase.auth.onAuthStateChange((event, session) => {
+        console.log(event, session);
         if(event == "SIGNED_IN" || event == "SIGNED_OUT") Router.reload();
     });
 }
